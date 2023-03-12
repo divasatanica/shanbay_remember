@@ -14,6 +14,8 @@ env:
 
 jobs:
   sender:
+    environment:
+      name: SHANBAY_COOKIE
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
