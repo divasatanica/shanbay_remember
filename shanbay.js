@@ -8,7 +8,9 @@ if (args.length < 3) {
 }
 const token = args[0];
 const chatId = args[1];
-const cookie = args[2]
+const cookie = args[2];
+
+console.log(args[0], args[1], args[2]);
 
 const PATH_API = (page, materialbookId = 'blozps', wordsType='NEW') =>
   `/wordsapp/user_material_books/${materialbookId}/learning/words/today_learning_items?ipp=10&page=${page}&type_of=${wordsType}`;
@@ -336,6 +338,7 @@ function send2telegram(text) {
 }
 
 async function getMaterialBookIdApi() {
+  console.log('Start to get material book id');
   const materialBookOpts = { ...options, path: '/wordsapp/user_material_books/current' };
 
   return new Promise((resolve, reject) => {
@@ -369,6 +372,7 @@ function downloadAudio(audioUrl, audioName, wordsType) {
 async function getAndSendResult(materialbookId, message = "", page = 1, wordsType="NEW") {
   let results = "";
   options.path = PATH_API(page, materialbookId, wordsType);
+  console.log('Start to get from book');
   let req = https.request(options, function (res) {
     res.on("data", function (chunk) {
       results = results + chunk;
