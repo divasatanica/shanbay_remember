@@ -348,6 +348,7 @@ async function getMaterialBookIdApi() {
         results = results + chunk;
       })
       res.on("end", () => {
+        console.log('End get books', results);
         try {
           const id = JSON.parse(results).materialbook_id;
           resolve(id);
@@ -378,6 +379,7 @@ async function getAndSendResult(materialbookId, message = "", page = 1, wordsTyp
       results = results + chunk;
     });
     res.on("end", function () {
+      console.log('End get words from the book', results);
       const toDecodeData = JSON.parse(results).data
       // if you are not remember new word, send nothing
       if (!toDecodeData) {
